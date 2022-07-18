@@ -5,12 +5,17 @@ import { ThemeProvider } from 'styled-components';
 import { Routes } from './routes';
 import { theme } from './styles/theme';
 import { ResetCSS } from './styles/global';
+import { ModalsContextProvider } from './context/ModalDeleteProvider';
+import { DeleteModal } from './modal/DeleteModal';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <ResetCSS />
-      <Routes />
-    </ThemeProvider>
+    <ModalsContextProvider>
+      <ThemeProvider theme={theme}>
+        <ResetCSS />
+        <Routes />
+        <DeleteModal />
+      </ThemeProvider>
+    </ModalsContextProvider>
   </StrictMode>,
 );

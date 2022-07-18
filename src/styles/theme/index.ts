@@ -13,9 +13,19 @@ export const theme = {
     placeholderInput: '#757575',
     grayHeader: '#00000029',
     white: '#fff',
+    backgroundFooterCard: '#FEFEFE',
+    colorButtoncard: '#979DA0',
+    red: {
+      400: '#F56565',
+      500: '#E53E3E',
+    },
+    green: {
+      400: '#48BB78',
+      500: '#38A169',
+    },
   },
   fonts: {
-    mulish: "'Mulish', sans-serif",
+    muli: "'muli', sans-serif",
   },
   fontSizes: {
     xs: '0.75rem',

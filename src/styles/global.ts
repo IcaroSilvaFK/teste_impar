@@ -13,13 +13,14 @@ export const ResetCSS = createGlobalStyle`
     height: 100%;
 
 
-    font-family: ${({ theme }) => theme.fonts.mulish};
+    font-family: ${({ theme }) => theme.fonts.muli};
     font-size:${({ theme }) => theme.fontSizes.md};
   }
 
   button,input{
     border: 0;
     outline: none;
+    font-family: ${({ theme }) => theme.fonts.muli};
   }
 
   button {

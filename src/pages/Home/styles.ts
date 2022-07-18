@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  background: ${({ theme }) => theme.colors.gray[50]};
+`;
 
 export const SectionFormSearch = styled.section`
   display: flex;
@@ -16,7 +18,7 @@ export const SectionFormSearch = styled.section`
 
 export const Form = styled.form`
   display: flex;
-  align-content: center;
+  align-items: center;
 
   background: ${({ theme }) => theme.colors.white};
 
@@ -24,7 +26,7 @@ export const Form = styled.form`
 
   border-radius: 5px;
 
-  width: 60%;
+  width: 1100px;
   height: 50px;
 
   button {
@@ -36,8 +38,39 @@ export const Form = styled.form`
     }
   }
 
-  label {
+  input {
     width: 100%;
     height: 100%;
+
+    font-size: ${({ theme }) => theme.fontSizes.xl};
+  }
+`;
+
+export const Main = styled.main`
+  max-width: 1100px;
+
+  margin: 30px auto;
+
+  section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+      color: ${({ theme }) => theme.colors.primary};
+      font-weight: 500;
+      font-size: ${({ theme }) => theme.fontSizes['3xl']};
+    }
+  }
+
+  .main__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    justify-content: center;
+    gap: 30px;
+
+    margin-top: 50px;
+
+    padding-bottom: 100px;
   }
 `;
