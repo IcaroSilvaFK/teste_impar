@@ -27,7 +27,7 @@ export function Card({ alt, imageUrl, text, id }: CardProps) {
   }
 
   return (
-    <Container>
+    <Container data-cy="card">
       <HeaderCard imageUrl={imageUrl} alt={alt} />
       <Separator />
       <ContentCard text={text} />

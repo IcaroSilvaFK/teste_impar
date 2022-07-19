@@ -33,7 +33,7 @@ export function DeleteModal() {
   if (!modalDeleteIsOpen) return null;
 
   return (
-    <Container onClick={handleCloseModalDelete}>
+    <Container onClick={handleCloseModalDelete} data-cy="delete-modal">
       <Modal onClick={(e) => e.stopPropagation()}>
         <button className="modal__closeButton" onClick={handleCloseModalDelete}>
           <X size={20} weight="bold" />

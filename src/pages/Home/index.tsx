@@ -1,15 +1,15 @@
 import { MagnifyingGlass, SmileySad } from 'phosphor-react';
 
-import { Header } from '../../components/Header';
 import { Button } from '../../components/Button';
 import { Card } from '../../components/Card';
+import { Header } from '../../components/Header';
+import { useFetchPosts } from '../../hooks/useFetchPosts';
 import { useModals } from '../../hooks/useModals';
 import { theme } from '../../styles/theme';
-import { useFetchPosts } from '../../hooks/useFetchPosts';
 
 import {
-  Container,
   CenterContainer,
+  Container,
   Form,
   Main,
   SectionFormSearch,
@@ -41,6 +41,7 @@ export function Home() {
             type="text"
             placeholder="Digite aqui sua busca..."
             onChange={(e) => handleChange(e.target.value)}
+            data-cy="input-search"
           />
           <button>
             <MagnifyingGlass size={30} />
@@ -55,12 +56,6 @@ export function Home() {
           </Button>
         </section>
         <section className="main__container">
-          {cards.length <= 0 && (
-            <CenterContainer>
-              <span>Infelizmente não temos cards</span>
-              <SmileySad size={25} color={theme.colors.placeholderInput} />
-            </CenterContainer>
-          )}
           {isLoading && (
             <CenterContainer>
               <div className="centerContainer__spinner"></div>
@@ -69,6 +64,12 @@ export function Home() {
           {isError && (
             <CenterContainer>
               <span>Infelizmente tivemos um erro</span>
+              <SmileySad size={25} color={theme.colors.placeholderInput} />
+            </CenterContainer>
+          )}
+          {cards.length <= 0 && (
+            <CenterContainer>
+              <span>Infelizmente não temos cards</span>
               <SmileySad size={25} color={theme.colors.placeholderInput} />
             </CenterContainer>
           )}

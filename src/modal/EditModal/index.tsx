@@ -115,7 +115,7 @@ export function EditModal() {
   if (!modalEditIsOpen) return null;
 
   return (
-    <Container onClick={handleCloseModalEdit}>
+    <Container onClick={handleCloseModalEdit} data-cy="card-edit">
       <CloseButton onClick={handleCloseModalEdit}>
         <X size={20} />
       </CloseButton>
@@ -132,6 +132,7 @@ export function EditModal() {
               id={cardNameId}
               {...register('title')}
               placeholder="Digite o título"
+              data-cy="create-cardinputText"
             />
           </div>
           <div>

@@ -11,7 +11,7 @@ type ButtonProps = {
 
 export function Button({ children, variant, onClick, type }: ButtonProps) {
   return (
-    <Container variant={variant} onClick={onClick} type={type}>
+    <Container variant={variant} onClick={onClick} type={type} data-cy="button">
       {children}
     </Container>
   );
