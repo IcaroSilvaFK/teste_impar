@@ -1,16 +1,17 @@
 import { X } from 'phosphor-react';
-import { toast } from 'react-toastify';
 import { Button } from '../../components/Button';
 import { api } from '../../configs/axios';
 import { useModals } from '../../hooks/useModals';
+import { toastError } from '../../utils/toastError';
+import { toastSucces } from '../../utils/toastSucces';
 
 import {
   Container,
-  Modal,
   ContainerImageModal,
   Content,
-  Separator,
+  Modal,
   Row,
+  Separator,
 } from './styles';
 
 export function DeleteModal() {
@@ -20,17 +21,12 @@ export function DeleteModal() {
   async function handleDeleteCard() {
     try {
       await api.delete(`cards/${elementId}`);
-      toast.success('Card deletado com sucesso', {
-        position: 'top-center',
-        draggable: true,
-      });
+      toastSucces('Card deletado com sucesso');
+
       setRefetch(true);
       handleCloseModalDelete();
     } catch (err) {
-      toast.error('Infelizmente não conseguimos deletar o conteudo', {
-        position: 'top-center',
-        draggable: true,
-      });
+      toastError('Infelizmente não conseguimos deletar o conteudo');
     }
   }
 

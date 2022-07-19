@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { api } from '../configs/axios';
 import { useModals } from './useModals';
 
@@ -9,7 +10,8 @@ type UseFetchPosts = {
 };
 
 export function useFetchPosts() {
-  const [posts, setPosts] = useState<UseFetchPosts[]>([]);
+  const [initialCards, setInitialCards] = useState<UseFetchPosts[]>([]);
+  const [cards, setCards] = useState<UseFetchPosts[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const { refetch, setRefetch } = useModals();
@@ -19,8 +21,9 @@ export function useFetchPosts() {
     (async () => {
       if (!refetch) return;
       try {
-        const { data } = await api.get('cards');
-        setPosts(data);
+        const { data } = await api.get<UseFetchPosts[]>('cards');
+        setCards(data);
+        setInitialCards(data);
         setIsLoading(false);
       } catch (err) {
         setIsLoading(false);
@@ -34,7 +37,8 @@ export function useFetchPosts() {
     (async () => {
       try {
         const { data } = await api.get('cards');
-        setPosts(data);
+        setInitialCards(data);
+        setCards(data);
         setIsLoading(false);
       } catch (err) {
         setIsLoading(false);
@@ -45,8 +49,10 @@ export function useFetchPosts() {
   }, [refetch]);
 
   return {
-    posts,
+    cards,
     isLoading,
     isError,
+    setCards,
+    initialCards,
   };
 }

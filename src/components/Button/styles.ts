@@ -14,7 +14,7 @@ export const Container = styled.button<ButtonProps>`
   transition: all 0.3s linear;
 
   :hover {
-    filter: brightness(1.1);
+    filter: brightness(0.9);
   }
 
   ${({ variant }) =>

@@ -1,7 +1,11 @@
-import { useEffect, useId, useState } from 'react';
 import { MagnifyingGlass, SmileySad } from 'phosphor-react';
 
 import { Header } from '../../components/Header';
+import { Button } from '../../components/Button';
+import { Card } from '../../components/Card';
+import { useModals } from '../../hooks/useModals';
+import { theme } from '../../styles/theme';
+import { useFetchPosts } from '../../hooks/useFetchPosts';
 
 import {
   Container,
@@ -10,57 +14,11 @@ import {
   Main,
   SectionFormSearch,
 } from './styles';
-import { Button } from '../../components/Button';
-import { Card } from '../../components/Card';
-import { useModals } from '../../hooks/useModals';
-import { api } from '../../configs/axios';
-import { theme } from '../../styles/theme';
-
-type UseFetchPosts = {
-  title: string;
-  image: string;
-  id: string;
-};
 
 export function Home() {
   const { handleOpenModalEdit } = useModals();
-  const [initialCards, setInitialCards] = useState<UseFetchPosts[]>([]);
-  const [cards, setCards] = useState<UseFetchPosts[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const { refetch, setRefetch } = useModals();
 
-  useEffect(() => {
-    setIsLoading(true);
-    (async () => {
-      if (!refetch) return;
-      try {
-        const { data } = await api.get<UseFetchPosts[]>('cards');
-        setCards(data);
-        setInitialCards(data);
-        setIsLoading(false);
-      } catch (err) {
-        setIsLoading(false);
-        setIsError(true);
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    setIsLoading(true);
-    (async () => {
-      try {
-        const { data } = await api.get('cards');
-        setInitialCards(data);
-        setCards(data);
-        setIsLoading(false);
-      } catch (err) {
-        setIsLoading(false);
-        setIsError(true);
-      }
-    })();
-    setRefetch(false);
-  }, [refetch]);
+  const { cards, initialCards, isError, isLoading, setCards } = useFetchPosts();
 
   function handleChange(value: string) {
     if (!value) {

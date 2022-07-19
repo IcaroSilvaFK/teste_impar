@@ -1,21 +1,22 @@
 import { X } from 'phosphor-react';
 import { useEffect, useId } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import { v4 as Uuid } from 'uuid';
 
 import { Button } from '../../components/Button';
 import { api } from '../../configs/axios';
 import { useFileReader } from '../../hooks/useFileReader';
 import { useModals } from '../../hooks/useModals';
+import { toastError } from '../../utils/toastError';
+import { toastSucces } from '../../utils/toastSucces';
 
 import {
+  CloseButton,
   Container,
   Form,
   HeaderModal,
   Modal,
   Row,
-  CloseButton,
 } from './styles';
 
 type EditmodalProps = {
@@ -58,7 +59,8 @@ export function EditModal() {
         });
         setImage(data.image);
       } catch (err) {
-        console.log(err);
+        toastError('Tivemos um erro na busca do card');
+        handleCloseModalEdit();
       }
     })();
   }, [elementId]);
@@ -75,10 +77,7 @@ export function EditModal() {
 
   const onSubmit: SubmitHandler<EditmodalProps> = async ({ title }) => {
     if (!image) {
-      toast.error('Por favor preencha o campo imagem', {
-        draggable: true,
-        position: 'top-center',
-      });
+      toastError('Por favor preencha o campo imagem');
     }
 
     const data = {
@@ -97,26 +96,19 @@ export function EditModal() {
         setImage(null);
         setElementId(null);
         setRefetch(true);
-        toast.success('Card atualizado com sucesso', {
-          draggable: true,
-          position: 'top-center',
-        });
+        toastSucces('Card atualizado com sucesso');
+
         return;
       }
       await api.post('cards', data);
-      toast.success('Card adicionado com sucesso', {
-        draggable: true,
-        position: 'top-center',
-      });
+      toastSucces('Card adicionado com sucesso');
+
       inputFileRef.current.value = null;
       reset();
       setImage(null);
       setRefetch(true);
     } catch (err) {
-      toast.error('Tivemos um problema em adicionar o card', {
-        draggable: true,
-        position: 'top-center',
-      });
+      toastError('Tivemos um problema em adicionar o card');
     }
   };
 

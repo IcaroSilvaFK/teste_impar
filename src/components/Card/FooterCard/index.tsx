@@ -1,6 +1,3 @@
-import { Trash, PencilSimple } from 'phosphor-react';
-import { theme } from '../../../styles/theme';
-
 import { Container } from './styles';
 
 type FooterCardProps = {
