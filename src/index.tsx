@@ -1,16 +1,16 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ThemeProvider } from 'styled-components';
 import { ToastContainer } from 'react-toastify';
+import { ThemeProvider } from 'styled-components';
 
-import { Routes } from './routes';
 import { ModalsContextProvider } from './context/ModalDeleteProvider';
-import { EditModal } from './modal/EditModal';
 import { DeleteModal } from './modal/DeleteModal';
+import { EditModal } from './modal/EditModal';
+import { Routes } from './routes';
 
-import { theme } from './styles/theme';
-import { ResetCSS } from './styles/global';
 import 'react-toastify/dist/ReactToastify.css';
+import { ResetCSS } from './styles/global';
+import { theme } from './styles/theme';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

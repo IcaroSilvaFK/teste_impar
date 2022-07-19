@@ -1,4 +1,5 @@
 import { MagnifyingGlass, SmileySad } from 'phosphor-react';
+import { startTransition } from 'react';
 
 import { Button } from '../../components/Button';
 import { Card } from '../../components/Card';
@@ -21,15 +22,17 @@ export function Home() {
   const { cards, initialCards, isError, isLoading, setCards } = useFetchPosts();
 
   function handleChange(value: string) {
-    if (!value) {
-      setCards(initialCards);
-    }
+    startTransition(() => {
+      if (!value) {
+        setCards(initialCards);
+      }
 
-    const postsFiltereds = initialCards.filter(({ title }) =>
-      title.toLowerCase().includes(value.toLowerCase()),
-    );
+      const postsFiltereds = initialCards.filter(({ title }) =>
+        title.toLowerCase().includes(value.toLowerCase()),
+      );
 
-    setCards(postsFiltereds);
+      setCards(postsFiltereds);
+    });
   }
 
   return (
