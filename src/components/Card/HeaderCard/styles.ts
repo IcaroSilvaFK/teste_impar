@@ -14,5 +14,6 @@ export const Container = styled.div`
     border-radius: 50px;
 
     border: 1px solid ${({ theme }) => theme.colors.gray[300]};
+    object-fit: cover;
   }
 `;

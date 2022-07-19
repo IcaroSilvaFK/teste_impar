@@ -1,25 +1,89 @@
 import { useEffect, useId, useState } from 'react';
-import { MagnifyingGlass } from 'phosphor-react';
+import { MagnifyingGlass, SmileySad } from 'phosphor-react';
 
 import { Header } from '../../components/Header';
 
-import { Container, Form, Main, SectionFormSearch } from './styles';
-import { theme } from '../../styles/theme';
+import {
+  Container,
+  CenterContainer,
+  Form,
+  Main,
+  SectionFormSearch,
+} from './styles';
 import { Button } from '../../components/Button';
 import { Card } from '../../components/Card';
-import { useFetchPosts } from '../../hooks/useFetchPosts';
 import { useModals } from '../../hooks/useModals';
+import { api } from '../../configs/axios';
+import { theme } from '../../styles/theme';
+
+type UseFetchPosts = {
+  title: string;
+  image: string;
+  id: string;
+};
 
 export function Home() {
-  const { isError, isLoading, posts } = useFetchPosts();
   const { handleOpenModalEdit } = useModals();
+  const [initialCards, setInitialCards] = useState<UseFetchPosts[]>([]);
+  const [cards, setCards] = useState<UseFetchPosts[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const { refetch, setRefetch } = useModals();
+
+  useEffect(() => {
+    setIsLoading(true);
+    (async () => {
+      if (!refetch) return;
+      try {
+        const { data } = await api.get<UseFetchPosts[]>('cards');
+        setCards(data);
+        setInitialCards(data);
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+        setIsError(true);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    (async () => {
+      try {
+        const { data } = await api.get('cards');
+        setInitialCards(data);
+        setCards(data);
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+        setIsError(true);
+      }
+    })();
+    setRefetch(false);
+  }, [refetch]);
+
+  function handleChange(value: string) {
+    if (!value) {
+      setCards(initialCards);
+    }
+
+    const postsFiltereds = initialCards.filter(({ title }) =>
+      title.toLowerCase().includes(value.toLowerCase()),
+    );
+
+    setCards(postsFiltereds);
+  }
 
   return (
     <Container>
       <Header />
       <SectionFormSearch>
         <Form>
-          <input type="text" placeholder="Digite aqui sua busca..." />
+          <input
+            type="text"
+            placeholder="Digite aqui sua busca..."
+            onChange={(e) => handleChange(e.target.value)}
+          />
           <button>
             <MagnifyingGlass size={30} />
           </button>
@@ -33,7 +97,24 @@ export function Home() {
           </Button>
         </section>
         <section className="main__container">
-          {posts.map((element) => (
+          {cards.length <= 0 && (
+            <CenterContainer>
+              <span>Infelizmente não temos cards</span>
+              <SmileySad size={25} color={theme.colors.placeholderInput} />
+            </CenterContainer>
+          )}
+          {isLoading && (
+            <CenterContainer>
+              <div className="centerContainer__spinner"></div>
+            </CenterContainer>
+          )}
+          {isError && (
+            <CenterContainer>
+              <span>Infelizmente tivemos um erro</span>
+              <SmileySad size={25} color={theme.colors.placeholderInput} />
+            </CenterContainer>
+          )}
+          {cards.map((element) => (
             <Card
               key={element.id}
               id={element.id}

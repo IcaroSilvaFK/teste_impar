@@ -10,7 +10,7 @@ export const ResetCSS = createGlobalStyle`
 
   body,html,#root{
     width: 100%;
-    height: 100%;
+    height: 100vh;
 
 
     font-family: ${({ theme }) => theme.fonts.muli};

@@ -17,6 +17,7 @@ export function useFetchPosts() {
   useEffect(() => {
     setIsLoading(true);
     (async () => {
+      if (!refetch) return;
       try {
         const { data } = await api.get('cards');
         setPosts(data);

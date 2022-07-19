@@ -6,11 +6,12 @@ type ButtonProps = {
   children: ReactNode;
   variant: 'solid' | 'danger' | 'outline';
   onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
 };
 
-export function Button({ children, variant, onClick }: ButtonProps) {
+export function Button({ children, variant, onClick, type }: ButtonProps) {
   return (
-    <Container variant={variant} onClick={onClick}>
+    <Container variant={variant} onClick={onClick} type={type}>
       {children}
     </Container>
   );

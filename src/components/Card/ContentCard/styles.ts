@@ -14,6 +14,7 @@ export const Container = styled.div`
 
     p {
       color: ${({ theme }) => theme.colors.textColor};
+      line-height: 150%;
     }
   }
 `;

@@ -17,4 +17,7 @@ export const Container = styled.header`
     ')'};
 
   padding: 16px;
+  @media screen and (max-width: 803px) {
+    justify-content: center;
+  }
 `;

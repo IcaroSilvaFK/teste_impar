@@ -1,7 +1,16 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const scale = keyframes`
+  0%{
+    transform: scale(.5);
+  }
+  100%{
+    transform: scale(1);
+  }
+`;
 
 export const Container = styled.div`
-  position: absolute;
+  position: fixed;
 
   top: 0;
   bottom: 0;
@@ -27,6 +36,8 @@ export const Modal = styled.div`
   border-radius: 5px;
 
   box-shadow: 0 0 3px ${({ theme }) => theme.colors.gray[300]};
+
+  animation: ${scale} 0.3s linear;
 
   .modal__closeButton {
     background: ${({ theme }) => theme.colors.colorButton};

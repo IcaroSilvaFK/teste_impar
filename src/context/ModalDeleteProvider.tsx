@@ -7,7 +7,7 @@ type ModalDeleteContextProps = {
   handleCloseModalEdit(): void;
   handleOpenModalDelete(): void;
   handleCloseModalDelete(): void;
-  setElementId(id: string): void;
+  setElementId(id: string | null): void;
   setRefetch(state: boolean): void;
   elementId: string | null;
   refetch: boolean;

@@ -1,7 +1,19 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const rotate = keyframes`
+  0%{
+    transform: rotate(0);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+`;
 
 export const Container = styled.div`
   background: ${({ theme }) => theme.colors.gray[50]};
+
+  width: 100%;
+  height: 100vh;
 `;
 
 export const SectionFormSearch = styled.section`
@@ -44,12 +56,16 @@ export const Form = styled.form`
 
     font-size: ${({ theme }) => theme.fontSizes.xl};
   }
+  @media screen and (max-width: 1127px) {
+    width: 90%;
+  }
 `;
 
 export const Main = styled.main`
   max-width: 1100px;
 
   margin: 30px auto;
+  background: ${({ theme }) => theme.colors.gray[50]};
 
   section {
     display: flex;
@@ -72,5 +88,49 @@ export const Main = styled.main`
     margin-top: 50px;
 
     padding-bottom: 100px;
+  }
+
+  @media screen and (max-width: 1127px) {
+    max-width: 820px;
+  }
+
+  @media screen and (max-width: 803px) {
+    width: 70%;
+
+    section {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      h1 {
+        font-size: ${({ theme }) => theme.fontSizes['2xl']};
+      }
+    }
+  }
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
+`;
+
+export const CenterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  span {
+    font-size: ${({ theme }) => theme.fontSizes.xl};
+    color: ${({ theme }) => theme.colors.placeholderInput};
+  }
+
+  .centerContainer__spinner {
+    border: 4px solid ${({ theme }) => theme.colors.colorButton};
+
+    border-bottom-color: transparent;
+
+    border-radius: 50px;
+
+    width: 50px;
+    height: 50px;
+
+    animation: ${rotate} 0.6s linear infinite;
   }
 `;
