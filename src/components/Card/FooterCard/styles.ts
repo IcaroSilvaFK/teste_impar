@@ -18,6 +18,11 @@ export const Container = styled.div`
 
     transition: all 0.3s linear;
 
+    img {
+      width: 14px;
+      height: 14px;
+    }
+
     span {
       color: ${({ theme }) => theme.colors.colorButtoncard};
       transition: all 0.3s linear;
@@ -30,7 +35,7 @@ export const Container = styled.div`
   .container__deleted {
     :hover {
       span {
-        color: ${({ theme }) => theme.colors.red[400]};
+        color: ${({ theme }) => theme.colors.red[500]};
       }
     }
   }

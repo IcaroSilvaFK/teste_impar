@@ -8,9 +8,11 @@ import { theme } from '../../styles/theme';
 import { Button } from '../../components/Button';
 import { Card } from '../../components/Card';
 import { useFetchPosts } from '../../hooks/useFetchPosts';
+import { useModals } from '../../hooks/useModals';
 
 export function Home() {
   const { isError, isLoading, posts } = useFetchPosts();
+  const { handleOpenModalEdit } = useModals();
 
   return (
     <Container>
@@ -26,7 +28,9 @@ export function Home() {
       <Main>
         <section>
           <h1>Resultado da busca</h1>
-          <Button>Novo Card</Button>
+          <Button variant="solid" onClick={handleOpenModalEdit}>
+            Novo Card
+          </Button>
         </section>
         <section className="main__container">
           {posts.map((element) => (

@@ -6,7 +6,8 @@ export const Container = styled.div`
   div {
     word-wrap: break-word;
     margin: auto;
-    height: 43px;
+    height: 50px;
+    max-height: 50px;
     max-width: 200px;
     text-align: center;
     overflow: hidden;

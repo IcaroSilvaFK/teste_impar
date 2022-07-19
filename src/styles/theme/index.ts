@@ -17,7 +17,7 @@ export const theme = {
     colorButtoncard: '#979DA0',
     red: {
       400: '#F56565',
-      500: '#E53E3E',
+      500: '#DB2525',
     },
     green: {
       400: '#48BB78',

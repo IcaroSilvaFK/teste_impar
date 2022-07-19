@@ -8,7 +8,9 @@ type ModalDeleteContextProps = {
   handleOpenModalDelete(): void;
   handleCloseModalDelete(): void;
   setElementId(id: string): void;
+  setRefetch(state: boolean): void;
   elementId: string | null;
+  refetch: boolean;
 };
 
 export const ModalsContext = createContext<ModalDeleteContextProps>(
@@ -19,6 +21,7 @@ export function ModalsContextProvider({ children }: { children: ReactNode }) {
   const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
   const [modalDeleteIsOpen, setModalDeleteIsOpen] = useState(false);
   const [elementId, setElementId] = useState<string | null>(null);
+  const [refetch, setRefetch] = useState(false);
 
   const handleOpenModalEdit = useCallback(() => {
     setModalEditIsOpen(true);
@@ -47,6 +50,8 @@ export function ModalsContextProvider({ children }: { children: ReactNode }) {
         handleCloseModalDelete,
         elementId,
         setElementId,
+        refetch,
+        setRefetch,
       }}
     >
       {children}
